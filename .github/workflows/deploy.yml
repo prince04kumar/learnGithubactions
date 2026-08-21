@@ -14,7 +14,15 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
         run: |
-          printf '%s\n' "$SSH_KEY" > /tmp/key.pem
+          # Support both pasted multiline keys and single-line keys with literal \n.
+          if printf '%s' "$SSH_KEY" | grep -q '\\n'; then
+            printf '%b' "$SSH_KEY" > /tmp/key.pem
+          else
+            printf '%s\n' "$SSH_KEY" > /tmp/key.pem
+          fi
+          tr -d '\r' < /tmp/key.pem > /tmp/key.pem.clean
+          mv /tmp/key.pem.clean /tmp/key.pem
+          chmod 600 /tmp/key.pem
           ssh-keygen -lf /tmp/key.pem
 
       - name: Connect to EC2 and deploy
