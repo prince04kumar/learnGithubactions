@@ -10,14 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check SSH key secret
-    run: |
-      if [ -z "${{ secrets.EC2_SSH_KEY }}" ]; then
-        echo "EC2_SSH_KEY is empty"
-        exit 1
-      else
-        echo "EC2_SSH_KEY is available"
-      fi
+      - name: Verify SSH key
+        env:
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          printf '%s\n' "$SSH_KEY" > /tmp/key.pem
+          ssh-keygen -lf /tmp/key.pem
+
       - name: Connect to EC2 and deploy
         uses: appleboy/ssh-action@v1.2.2
         with:
