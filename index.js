@@ -7,7 +7,9 @@ const app = express();
 // define a route for the root path
 
 app.get("/", (req, res) => {
-  res.send("Hello, World!");
+  res.send(
+    "Hello, World! This change is auto made by GitHub Actions workflow.",
+  );
 });
 
 // start the server
