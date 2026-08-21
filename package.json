@@ -1,0 +1,23 @@
+{
+  "name": "githubactions",
+  "version": "1.0.0",
+  "description": "this is test for github actions",
+  "homepage": "https://github.com/prince04kumar/learnGithubactions#readme",
+  "bugs": {
+    "url": "https://github.com/prince04kumar/learnGithubactions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prince04kumar/learnGithubactions.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
